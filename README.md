@@ -49,9 +49,22 @@ and the testing will be limited to the domains of  ` product images ` and ` real
 | ----- | ----- | --- | -------- |
 | Michele | Yin | 229359 | michele.yin@studenti.unitn.it | 
 | Giovanni | Ambrosi | 232252 | giovanni.ambrosi@studenti.unitn.it | 
-| Filippo | Daniotti | 232087 | filippo.daniotti@studenti.unitn.it | 
+| Filippo | Daniotti | 232087 | filippo.daniotti@studenti.unitn.it |
+
+# How to run 
+1. Make sure to check the `Configuration` cell
+2. Ensure you have the `Adaptiope.zip` archive in the correct path
+3. Run the setup cell groups:
+    * initial setup
+    * dataset preparation
+    * data loaders
+    * plotting
+    * shared components
+4. Run pretty much any cell you want
 
 # Results
+
+Check out [our notebook](https://colab.research.google.com/drive/1gHuVmc-eliiw63bhxs-GCMvgKh7kCt7W?usp=sharing) on Colab with cell outputs!
 
 | Model       | R -> P      | P -> R      | Absolute Gain R->P | Absolute Gain P->R | Percentage Gain P | Percentage Gain R |Upper Bound P | Upper Bound R| 
 | ----------- | ----------- | ----------- | ---------- | ---------- |  ---------- | ---------- |  ---------- | ---------- | 
