@@ -1,22 +1,16 @@
-<a target="_blank" href="https://colab.research.google.com/github/filippodaniotti/DL-domain-adaptation/blob/master/domain_adaptation.ipynb">
+<a target="_blank" href="https://colab.research.google.com/github/filippodaniotti/DL-domain-adaptation/blob/master/notebooks/domain_adaptation.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
 # Unsupervised Domain Adaptation
 
-In this notebook we will try to solve a domain adaptation task.
+In this project we will try to solve a domain adaptation task. 
 
-In particular we will be focues on the task of **unsupervised domain adaptation (UDA)**. 
+In particular, we will be focues on the task of **unsupervised domain adaptation (UDA)**.  Given a source labelled dataset and a target unlabelled dataset, we are tasked to find a model that perform well on the target unlabelled dataset. More formally, we call $X_S = \{(x_1,y_1),(x_2,y_2)...(x_n,y_n)\}$  the source dataset and $X_T = \{(x_1),(x_2)...(x_n)\}$  the target unlabelled dataset.
 
-Given a source labelled dataset and a target unlabelled dataset, we are tasked to find a model that perform well on the target unlabelled dataset.
+More specifically the dataset tested is a subset of [Adaptiope](https://openaccess.thecvf.com/content/WACV2021/papers/Ringwald_Adaptiope_A_Modern_Benchmark_for_Unsupervised_Domain_Adaptation_WACV_2021_paper.pdf), a dataset specifically designed as a domain adaptation benchmark. We will be using only these labels:
 
-Where $X_S = \{(x_1,y_1),(x_2,y_2)...(x_n,y_n)\}$ is the source dataset and $X_T = \{(x_1),(x_2)...(x_n)\}$ is the target unlabelled dataset.
-
-More specifically the dataset tested is a subset of `Adaptiope`, a dataset specifically designed as a domain adaptation benchmark. 
-
-We will be using only these labels:
-
-```
+```python
 [
     "backpack",
     "bookcase", 
@@ -41,7 +35,7 @@ We will be using only these labels:
 ]
 ```
 
-and the testing will be limited to the domains of  ` product images ` and ` real word `. The ` synthetic ` domain will be ignored.
+and the testing will be limited to the domains of ` product images ` and ` real word `. The ` synthetic ` domain will be ignored.
 
 # Team
 
@@ -51,9 +45,15 @@ and the testing will be limited to the domains of  ` product images ` and ` real
 | Giovanni | Ambrosi | 232252 | giovanni.ambrosi@studenti.unitn.it | 
 | Filippo | Daniotti | 232087 | filippo.daniotti@studenti.unitn.it |
 
-# How to run 
+# Notebooks
+In the [notebooks](notebooks/) directory you will find two items:
+* [domain_ataptation.ipynb](notebooks/domain_adaptation.ipynb): contains the delivered code for the actual project; you can also access [here](https://colab.research.google.com/drive/1gHuVmc-eliiw63bhxs-GCMvgKh7kCt7W?usp=sharing) as read-only the working copy we used in our drive
+* [scrapped_approaches.ipynb](notebooks/scrapped_approaches.ipynb): contains some code we wrote but later scrapped from the main notebook 
+
+## How to run 
+This instructions refer only to the [domain_ataptation.ipynb](notebooks/domain_adaptation.ipynb) notebook
 1. Make sure to check the `Configuration` cell
-2. Ensure you have the `Adaptiope.zip` archive in the correct path
+2. Ensure you have the `Adaptiope.zip` archive in the correct path (get it [here](https://gitlab.com/tringwald/adaptiope))
 3. Run the setup cell groups:
     * initial setup
     * dataset preparation
@@ -62,9 +62,24 @@ and the testing will be limited to the domains of  ` product images ` and ` real
     * shared components
 4. Run pretty much any cell you want
 
+If you want to load the serialized weights from our experiments:
+1. Copy the weights from the [`trained_models`](trained_models/) directory to any directory in your environment, e.g. `weights/`
+2. Set the appropriate `MODELS_BASEPATH` constant in the `Configuration` cell, e.g. `gdrive/MyDrive/weights`
+3. Then, say that you want to load and thest the $P \rightarrow R$ of the `Self Supervision`
+   - go to the `Finetune ResNet18 on P -> R` cell under the `Self Supervision` block
+   - run the `Load` cell block
+   - now you will have the weights in your gdrive working directory
+   - try to run the `Test` cell group to see the results
+
 # Results
 
-Check out [our notebook](https://colab.research.google.com/drive/1gHuVmc-eliiw63bhxs-GCMvgKh7kCt7W?usp=sharing) on Colab with cell outputs!
+In the following table you can find a recap of the accuracy values we achieved from our experiments.
+
+We highly suggest to check out the [domain_ataptation.ipynb]([notebooks/domain_adaptation.ipynb](https://colab.research.google.com/drive/1gHuVmc-eliiw63bhxs-GCMvgKh7kCt7W?usp=sharing)) notebook to see all the plots we used for the evaluation. In particular, you will find:
+* t-SNE plots
+* Confusion matrices
+* Error images
+* Class-wise confidence value on predictions
 
 | Model       | R -> P      | P -> R      | Absolute Gain R->P | Absolute Gain P->R | Percentage Gain P | Percentage Gain R |Upper Bound P | Upper Bound R| 
 | ----------- | ----------- | ----------- | ---------- | ---------- |  ---------- | ---------- |  ---------- | ---------- | 
